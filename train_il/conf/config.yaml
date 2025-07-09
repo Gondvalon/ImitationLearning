@@ -1,0 +1,41 @@
+defaults:
+  - _self_
+
+hydra:
+  run:
+    dir: .
+
+mode: "3D"
+
+data:
+  dataset_path: dataset/InsertionLShape3DRot/smoothed
+
+training:
+  logging_dir: logging/IL_training_${mode}/InsertionLShape3DRot
+  checkpoint_location: models
+  device: gpu
+  cpu_cores: 1
+  seed: 0
+  trainable_network: MSVF  # use MLP or MSVF
+  validation_split: 0.2
+  max_epochs: 100
+  num_workers: 8
+  batch_size: 16
+  learning_rate: 5e-4
+  pos_action_alpha: 1.0
+  rot_action_alpha: 1.0
+  num_features: 64
+  num_trials: 10
+  env_id: InsertionLShape3DRot       # InsertionLShape${mode}Rot
+  max_env_steps: 300
+  evaluation_period: 10
+  checkpoint_filename_prefix: il_${mode}
+  record_final_video: true
+  num_rec_episodes: 10
+  debug: True
+
+wandb_il:
+  project: svf-IL-InsertionLShape3DRot
+  entity: svf-rl
+  dir: logging/IL_training_${mode}/InsertionLShape3DRot/wandb_log
+  wandb_mode: online
