@@ -205,3 +205,11 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Logging files
+**/logs
+**/lightning_logs
+
+
+# Datasets
+**/dataset
